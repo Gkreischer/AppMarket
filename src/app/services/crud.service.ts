@@ -25,15 +25,8 @@ export class CrudService {
   }
 
   getSpecificData(route, data): Observable<any> {
-    return this.http.post(`${environment.baseUrl}${route}`, { data: data, }).pipe(
+    return this.http.get(`${environment.baseUrl}${route}/${data}`).pipe(
       tap((data: any) => { return true }),
-      catchError(this.handleError)
-    );
-  }
-
-  getDataById(route, data, id): Observable<any> {
-    return this.http.post(`${environment.baseUrl}${route}`, { data: data, id: id, }).pipe(
-      tap((data: any) => console.log('Data da id obtida')),
       catchError(this.handleError)
     );
   }
