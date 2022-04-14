@@ -31,4 +31,19 @@ export class ProductPage implements OnInit {
     })
   }
 
+  addProductToFavorites(event){
+    let target = event.target || event.currentTarget || event.srcElement;
+    let id = target.attributes.id.value;
+
+    let op = confirm('Do you want to add this product on favorites?');
+
+    if(op){
+
+      alert('Product added with success');
+
+    } else {
+      alert('Operation canceled succefully');
+    }
+  }
+
 }

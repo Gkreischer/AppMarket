@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'product/:id',
     loadChildren: () => import('./components/product/product.module').then( m => m.ProductPageModule)
+  },  {
+    path: 'favorites',
+    loadChildren: () => import('./components/favorites/favorites.module').then( m => m.FavoritesPageModule)
   }
+
 ];
 
 @NgModule({
