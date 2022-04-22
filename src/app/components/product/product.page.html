@@ -48,10 +48,13 @@
               </ion-row>
               <ion-row class="ion-text-center">
                 <ion-col>
-                  <ion-button color="warning" (click)="addProductToFavorites($event)" id="{{product.id}}">
+                  <ion-button *ngIf="!favorite" color="warning" (click)="addProductToFavorites($event)" id="{{product.id}}">
                     <ion-icon name="heart-outline"></ion-icon>
                   </ion-button>
-                  <ion-button color="danger">Comprar</ion-button>
+                  <ion-button *ngIf="favorite" color="warning" (click)="removeProductFromFavorites($event)" id="{{product.id}}">
+                    <ion-icon name="{{favorite ? 'heart' : 'heart-outline'}}"></ion-icon>
+                  </ion-button>
+                  <ion-button color="danger">Buy</ion-button>
                 </ion-col>
               </ion-row>
             </ion-grid>

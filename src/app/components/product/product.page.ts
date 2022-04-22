@@ -13,9 +13,9 @@ export class ProductPage implements OnInit {
 
   id: number = null;
   product: Product = null;
-
+  favorite: boolean = false;
   constructor(private route: ActivatedRoute, private crud: CrudService, private storage: Storage) {
-    
+
   }
 
   async ngOnInit() {
@@ -24,6 +24,23 @@ export class ProductPage implements OnInit {
     this.getProductDetail();
 
     await this.storage.create();
+
+    this.isFavorite();
+  }
+
+  async isFavorite() {
+    let favorites = await this.storage.keys();
+
+    let favoriteProduct = favorites.filter((favoriteId) => {
+      return +favoriteId === this.id;
+    });
+
+    if (favoriteProduct.length > 0) {
+      this.favorite = true;
+    } else {
+      this.favorite = false;
+    }
+
   }
 
 
@@ -45,12 +62,33 @@ export class ProductPage implements OnInit {
 
       alert('Product added with success');
 
-      await this.storage.set(id, id);
+      await this.storage.set(id, this.product);
 
-      console.log(await this.storage.get(id));
+      this.favorite = true;
 
     } else {
+
       alert('Operation canceled succefully');
+
+    }
+  }
+
+  async removeProductFromFavorites(event) {
+
+    let target = event.target || event.srcElement || event.currentTarget;
+    let id = target.attributes.id.value;
+    let confirm = window.confirm('Do you want remove the favorite product selected?');
+
+    if(confirm) {
+
+      await this.storage.remove(id);
+      this.favorite = false;
+      alert('Product remove succefully');
+
+    } else {
+
+      alert('Operation canceled succefuly');
+
     }
   }
 
