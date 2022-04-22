@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CrudService } from 'src/app/services/crud.service';
 import { Product } from 'src/app/shared/product';
 import { Storage } from '@ionic/storage-angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-product',
@@ -14,7 +15,7 @@ export class ProductPage implements OnInit {
   id: number = null;
   product: Product = null;
   favorite: boolean = false;
-  constructor(private route: ActivatedRoute, private crud: CrudService, private storage: Storage) {
+  constructor(private route: ActivatedRoute, private crud: CrudService, private storage: Storage, private toast: ToastController) {
 
   }
 
@@ -26,6 +27,14 @@ export class ProductPage implements OnInit {
     await this.storage.create();
 
     this.isFavorite();
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toast.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
   async isFavorite() {
@@ -60,7 +69,7 @@ export class ProductPage implements OnInit {
 
     if (op) {
 
-      alert('Product added with success');
+      this.presentToast('Product added with success');
 
       await this.storage.set(id, this.product);
 
@@ -68,7 +77,9 @@ export class ProductPage implements OnInit {
 
     } else {
 
-      alert('Operation canceled succefully');
+      this.presentToast('Operation canceled succefully');
+
+      return false;
 
     }
   }
@@ -83,11 +94,14 @@ export class ProductPage implements OnInit {
 
       await this.storage.remove(id);
       this.favorite = false;
-      alert('Product remove succefully');
+
+      this.presentToast('Product removed succefully');
+
 
     } else {
 
-      alert('Operation canceled succefuly');
+      this.presentToast('Operation canceled succefuly');
+
 
     }
   }
