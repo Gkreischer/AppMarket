@@ -39,7 +39,7 @@ export class CrudService {
   }
 
   login(route: string, data): Observable<any> {
-    return this.http.post<any>(`${environment.baseUrl}${route}`, { data: data }).pipe(
+    return this.http.post<any>(`${environment.baseUrl}${route}`, data, httpOptions).pipe(
       tap((data: any) => {return}),
       catchError(this.handleError)
     );
@@ -61,10 +61,10 @@ export class CrudService {
       // The response body may contain clues as to what went wrong,
       console.error(
         `Codigo retornado do backend ${error.status}, ` +
-        `body era: ${JSON.stringify(error.error.error.message)}`);
+        `body era: ${JSON.stringify(error.message)}`);
     }
     // return an observable with a user-facing error message
     return throwError(
-      error.error.error.message);
+      `${error.status} - ${error.statusText}`);
   };
 }

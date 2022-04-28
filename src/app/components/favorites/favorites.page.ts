@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
-import { CrudService } from 'src/app/services/crud.service';
 import { Product } from 'src/app/shared/product';
 import { ToastController } from '@ionic/angular';
 
@@ -14,13 +13,13 @@ export class FavoritesPage implements OnInit {
 
   favoritesInfo: Product[] = [];
 
-  constructor(private storage: Storage, private crud: CrudService, private route: Router, private toast: ToastController) { }
+  constructor(private storage: Storage, private route: Router, private toast: ToastController) { }
 
   async ngOnInit() {
     await this.storage.create();
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.favoritesInfo = [];
     this.getAllFavorites();
   }
@@ -42,7 +41,7 @@ export class FavoritesPage implements OnInit {
         await console.log(this.favoritesInfo);
       });
     } else {
-      return false;
+      return;
     }
 
   }
@@ -59,12 +58,13 @@ export class FavoritesPage implements OnInit {
       this.favoritesInfo = this.favoritesInfo.filter((favorite) => {
         return favorite.id !== +id;
       })
-      
-      this.presentToast('Product favorited remove with success');
+
+      this.presentToast('Product favorited removed with success');
 
     } else {
 
       this.presentToast('Operation canceled succefully');
+      return;
 
     }
   }

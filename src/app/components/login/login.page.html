@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-md="4">
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              Login
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="formLogin" (ngSubmit)="sendForm()">
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-item>
+                      <ion-label class="ion-margin-bottom" position="stacked">Email</ion-label>
+                      <ion-input type="email" name="email" formControlName="username"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item>
+                      <ion-label position="stacked">Password</ion-label>
+                      <ion-input type="password" name="password" formControlName="password"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-button expand="block" type="submit">Enter</ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </form>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
