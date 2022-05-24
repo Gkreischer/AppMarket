@@ -35,10 +35,16 @@ export class FavoritesPage implements OnInit {
   async getAllFavorites() {
     let favorites = await this.storage.keys();
 
+    console.log(favorites);
+
     if (favorites.length > 0) {
       favorites.forEach(async (el) => {
-        this.favoritesInfo.push(await this.storage.get(el));
-        await console.log(this.favoritesInfo);
+
+        if (el !== 'token') {
+          this.favoritesInfo.push(await this.storage.get(el));
+        } else {
+          return;
+        }
       });
     } else {
       return;
