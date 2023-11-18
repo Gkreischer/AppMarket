@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ionic build --prod && npx angular-cli-ghpages --dir=www"
+    "deploy": "ionic build --prod && npx angular-cli-ghpages --dir=www -S"
   },
   "private": true,
   "dependencies": {

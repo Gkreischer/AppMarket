@@ -10,7 +10,6 @@ export class AppComponent implements OnInit {
   public appPages = [
     { title: 'Home', url: '/home', icon: 'home' },
     { title: 'Favorites', url: '/favorites', icon: 'heart' },
-    { title: 'Cart', url: '/cart', icon: 'cart' },
     { title: 'Contact', url: '/contact', icon: 'call' },
     { title: 'Login', url: '/login', icon: 'log-in' }
   ];
